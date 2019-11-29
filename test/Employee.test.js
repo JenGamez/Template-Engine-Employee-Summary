@@ -1,7 +1,12 @@
 const Employee = require("../lib/Employee");
 
+// test below is a funtion which is will be globally available.  First argument is the string.  Second argrument is the anonymous function.  THIS IS A UNTI TEST
+
+// Input
 test("Can instantiate Employee instance", () => {
+  // expected result
   const e = new Employee();
+  // Assert the result
   expect(typeof(e)).toBe("object");
 });
 
