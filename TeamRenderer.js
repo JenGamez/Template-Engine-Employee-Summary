@@ -1,29 +1,32 @@
 const path = require("path");
 const fs = require("fs");
+const apps = require("./app");
+var teamMembers = apps.teamMembers;
+
 
 
 // variable for establishing location of templates
-const templatesDir = path.resolve(__dirname, "../templates");
+const templatesDir = path.resolve(__dirname, "../Template-Engine-Employee-Summary/templates");
 
-const render = employees => {
+const render = (teamMembers) => {
 
 
     // Empty array for html
     const html = [];
 
 // Push the employee role data into the html array
-    html.push(employees
-        .filter(employee => employee.getRole() === "Manager")
+    html.push(teamMembers
+        .filter(teamMembers => teamMembers.getRole() === "Manager")
         .map(manager => renderManager(manager))
     );
 
-    html.push(employees
-        .filter(employee => employee.getRole() === "Engineer")
+    html.push(teamMembers
+        .filter(teamMembers => teamMembers.getRole() === "Engineer")
         .map(engineer => renderEngineer(engineer))
     );
 
-    html.push(employees
-        .filter(employee => employee.getRole() === "Intern")
+    html.push(teamMembers
+        .filter(teamMembers => teamMembers.getRole() === "Intern")
         .map(intern => renderIntern(intern))
     );
 
@@ -50,7 +53,7 @@ const renderEngineer = engineer => {
     template = replacePlaceholders(template, "role", engineer.getRole());
     template = replacePlaceholders(template, "email", engineer.getEmail());
     template = replacePlaceholders(template, "id", engineer.getId());
-    template = replacePlaceholders(template, "gitHub", engineer.getGitHub());
+    template = replacePlaceholders(template, "github", engineer.getGithub());
 
     return template;
 };
@@ -69,7 +72,9 @@ const renderIntern = intern => {
 
 const renderMain = html => {
     const template = fs.readFileSync(path.resolve(templatesDir, "main.html"), "utf8");
-    return replacePlaceholders(template, "team", html);
+    const masterHTML = replacePlaceholders(template, "team", html);
+    const file = path.join(__dirname, "output", "/mainOutput.html");
+    fs.writeFileSync(file, masterHTML);
   };
 
 //   RegExp constructor creates a regular expression object for matching text with a pattern.
