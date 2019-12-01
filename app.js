@@ -1,9 +1,10 @@
 // Runs the application
 
 var inquirer = require("inquirer");
-var Manager = require("./lib/Manager"); 
+var Manager = require("./lib/Manager");
 var Engineer = require("./lib/Engineer");
 var Intern = require("./lib/Intern");
+var render = require("./output/TeamRenderer");
 
 
 const teamMembers = []
@@ -42,115 +43,133 @@ function createTeam() {
             }
         })
 
-    function addManager() {
-       
-        inquirer
-            .prompt([
 
-                {
-                    type: "input",
-                    message: "What is your first name?",
-                    name: "managerName"
-                },
+function addManager() {
 
-                {
-                    type: "input",
-                    message: "What is your employee ID?",
-                    name: "managerID"
-                },
+    inquirer
+        .prompt([
 
-                {
-                    type: "input",
-                    message: "What is your email?",
-                    name: "managerEmail"
-                },
+            {
+                type: "input",
+                message: "What is your first name?",
+                name: "managerName"
+            },
 
-                {
-                    type: "input",
-                    message: "What is your office number?",
-                    name: "managerOfficeNumber"
-                }
+            {
+                type: "input",
+                message: "What is your employee ID?",
+                name: "managerID"
+            },
 
-            ]).then(userChoice => {
-                console.log(userChoice);
+            {
+                type: "input",
+                message: "What is your email?",
+                name: "managerEmail"
+            },
 
-                const manager = new Manager(userChoice.managerName, userChoice.managerID, userChoice.managerEmail, userChoice.managerOfficeNumber)
-
-                teamMembers.push(manager)
-
-            }) 
-
-
+            {
+                type: "input",
+                message: "What is your office number?",
+                name: "managerOfficeNumber"
             }
-    }
 
-    function addEngineer() {
-        
-        inquirer
-            .prompt([
+        ]).then(userChoice => {
+            console.log(userChoice);
 
-                {
-                    type: "input",
-                    message: "What is your first name?",
-                    name: "engineerName"
-                },
+            const manager = new Manager(userChoice.managerName, userChoice.managerID, userChoice.managerEmail, userChoice.managerOfficeNumber)
 
-                {
-                    type: "input",
-                    message: "What is your employee ID?",
-                    name: "engineerID"
-                },
+            teamMembers.push(manager)
 
-                {
-                    type: "input",
-                    message: "What is your email?",
-                    name: "engineerEmail"
-                },
+        })
 
-                {
-                    type: "input",
-                    message: "What is your GitHub username?",
-                    name: "gitHubUsername"
-                }
-            ]).then(userChoice => {
-                console.log(userChoice);
-            }) 
-    }
 
-    function addIntern() {
-      
-        inquirer
-            .prompt([
+}
 
-                {
-                    type: "input",
-                    message: "What is your first name?",
-                    name: "internName"
-                },
 
-                {
-                    type: "input",
-                    message: "What is your employee ID?",
-                    name: "internID"
-                },
+function addEngineer() {
+    inquirer
+        .prompt([
 
-                {
-                    type: "input",
-                    message: "What is your email?",
-                    name: "internEmail"
-                },
+            {
+                type: "input",
+                message: "What is your first name?",
+                name: "engineerName"
+            },
 
-                {
-                    type: "input",
-                    message: "What is your school?",
-                    name: "internSchool"
-                }
-            ]).then(userChoice => {
-                console.log(userChoice);
-            }) 
-    }
+            {
+                type: "input",
+                message: "What is your employee ID?",
+                name: "engineerID"
+            },
 
-    createTeam()
+            {
+                type: "input",
+                message: "What is your email?",
+                name: "engineerEmail"
+            },
+
+            {
+                type: "input",
+                message: "What is your GitHub username?",
+                name: "gitHubUsername"
+            }
+        ]).then(userChoice => {
+            console.log(userChoice);
+
+            const engineer = new Engineer(userChoice.engineerName, userChoice.engineerID, userChoice.engineerEmail, userChoice.gitHubUsername)
+
+            teamMembers.push(engineer)
+
+        })
+}
+
+
+
+
+function addIntern() {
+
+    inquirer
+        .prompt([
+
+            {
+                type: "input",
+                message: "What is your first name?",
+                name: "internName"
+            },
+
+            {
+                type: "input",
+                message: "What is your employee ID?",
+                name: "internID"
+            },
+
+            {
+                type: "input",
+                message: "What is your email?",
+                name: "internEmail"
+            },
+
+            {
+                type: "input",
+                message: "What is your school?",
+                name: "internSchool"
+            }
+        ]).then(userChoice => {
+            console.log(userChoice);
+
+            const intern = new Intern(userChoice.internName, userChoice.internID, userChoice.internEmail, userChoice.internSchool)
+
+            teamMembers.push(intern)
+        })
+}
+}
+
+
+
+createTeam();
+render(teamMembers);
+
+module.export = teamMembers;
 
 
 

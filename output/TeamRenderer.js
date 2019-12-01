@@ -1,6 +1,7 @@
 const path = require("path");
 const fs = require("fs");
 
+
 const templatesDir = path.resolve(__dirname, "../templates");
 
 const render = employees => {
@@ -66,22 +67,11 @@ const renderMain = html => {
     const template = fs.readFileSync(path.resolve(templatesDir, "main.html"), "utf8");
     return replacePlaceholders(template, "team", html);
   };
+
   const replacePlaceholders = (template, placeholder, value) => {
     const pattern = new RegExp("{{ " + placeholder + " }}", "gm");
     return template.replace(pattern, value);
   };
-
-//   import the render function into app.js
-// Run render function and pass in whole teamMembers array
-
-// const renderMain = html => {
-//     let template = readFileSync(path.resolve(templatesDir, "main.html"), "utf8")
-    
-    
-// };
-
-// (path.resolve(templatesDir, "manager.html"), "utf8")
-
 
 
 module.exports = render;
