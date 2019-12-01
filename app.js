@@ -4,7 +4,7 @@ var inquirer = require("inquirer");
 var Manager = require("./lib/Manager");
 var Engineer = require("./lib/Engineer");
 var Intern = require("./lib/Intern");
-var render = require("./output/TeamRenderer");
+var render = require("./lib/TeamRenderer");
 
 
 const teamMembers = []
@@ -169,7 +169,7 @@ function addIntern() {
 createTeam();
 render(teamMembers);
 
-module.export = teamMembers;
+
 
 
 
