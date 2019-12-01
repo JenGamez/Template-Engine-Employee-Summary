@@ -8,6 +8,7 @@ var teamMembers = apps.teamMembers;
 // variable for establishing location of templates
 const templatesDir = path.resolve(__dirname, "../Template-Engine-Employee-Summary/templates");
 
+// Function to render the team info
 const render = (teamMembers) => {
 
 
